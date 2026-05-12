@@ -1,0 +1,36 @@
+<!-- 
+     상태 선텍자 / *** 구조 선택자
+     ***문자 선택자 / 부정 선택자
+     
+     상태 선택자 : 태그를 가지고 온다
+               --------------
+      ***:checked : 선택된 경우
+          => checkbox
+          => 자동 로그인 / ID 저장
+          => ----------------- JSP에서 제작 (cookie)
+          => Front : JavaScript (localStroge,Session)
+      :focus 
+      :enable : 활성화
+      :disabled : 비활성화
+    반응 선택자
+     :hover
+     :active
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#a:active , #b:active , #c:active{
+  color: red;
+}
+</style>
+</head>
+<body>
+  <h1>:active , :hover</h1>
+  <h3 id="a">HTML / CSS</h3>
+  <h3 id="b">HTML5 / CSS</h3>
+  <h3 id="c">JavaScript ES6.0</h3>
+</body>
+</html>
