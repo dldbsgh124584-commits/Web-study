@@ -136,7 +136,34 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="JSPBasicProject_2" path="/JSPBasicProject_2" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_2"/><Context docBase="JSPBasicProject_3" path="/JSPBasicProject_3" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_3"/><Context docBase="JSPBasicProject_4" path="/JSPBasicProject_4" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_4"/><Context docBase="JSPBasicProject_5" path="/JSPBasicProject_5" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_5"/></Host>
+      <Context docBase="JSPBasicProject_6" path="/JSPBasicProject_6" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_6"/>
+      <Context docBase="JSPBasicProject_7" path="/JSPBasicProject_7" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_7">
+      <!--
+           maxActive="" 동시에 사용할 수 있는 최대 Connection 갯수
+           maxIdle="" 저장장소(풀)에 유지할 수 있는 최대 Connection 갯수
+           maxWait="" Connection이 부족할 때 반환할 때까지 기다리는 시간
+           auth="" Connection 생성 관리
+           name="" 저장 => 주소값이 저장 => 별칭
+           type="" Connection주소를 가지고 올 때 받는 클래스명
+           
+           = MyBatis / JPA는 라이브러리로 만들어져 있다
+           = 방법
+           = 웹 개발 => Connection Pool
+           
+           JSP => MVC
+            = 지시자 : page / taglib
+            = 내장 객체 : request , response , session , cookie
+            = 액션 : <jsp:include>
+            = VO / DAO 
+            DBCP는 필요한 데이터가 서버에만 저장 = 보안 
+      
+        -->
+       <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="10" maxIdle="10" maxWait="-1" name="jdbc/oracle" password="happy" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:XE" username="hr"/>
+      </Context>
+      <Context docBase="JSPBasicProject_8" path="/JSPBasicProject_8" reloadable="true" source="org.eclipse.jst.jee.server:JSPBasicProject_8">
+      <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="10" maxIdle="10" maxWait="-1" name="jdbc/oracle" password="happy" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:XE" username="hr"/>
+      </Context>
+      </Host>
     </Engine>
   </Service>
 </Server>
