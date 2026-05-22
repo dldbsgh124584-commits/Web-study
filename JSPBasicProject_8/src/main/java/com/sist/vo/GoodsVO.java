@@ -1,4 +1,4 @@
-package com.sist.VO;
+package com.sist.vo;
 /*
  *  NO                NOT NULL NUMBER         
 GOODS_NAME        NOT NULL VARCHAR2(1000) 

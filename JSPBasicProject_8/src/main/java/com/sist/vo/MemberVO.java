@@ -1,4 +1,4 @@
-package com.sist.VO;
+package com.sist.vo;
 /*
 		 *  ID      NOT NULL VARCHAR2(20)  
 		PWD     NOT NULL VARCHAR2(10)  

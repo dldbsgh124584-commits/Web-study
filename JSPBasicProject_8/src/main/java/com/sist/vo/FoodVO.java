@@ -1,4 +1,4 @@
-package com.sist.VO;
+package com.sist.vo;
 
 import lombok.Data;
 
