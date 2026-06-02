@@ -177,7 +177,7 @@
       <Context docBase="JSPMVCProject3" path="/JSPMVCProject3" reloadable="true" source="org.eclipse.jst.jee.server:JSPMVCProject3">
       <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="10" maxIdle="10" maxWait="-1" name="jdbc/oracle" password="happy" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:XE" username="hr"/>
       </Context>
-      </Host>
+      <Context docBase="JSPMVCProject4" path="/JSPMVCProject4" reloadable="true" source="org.eclipse.jst.jee.server:JSPMVCProject4"/><Context docBase="JSPMVCProject5" path="/JSPMVCProject5" reloadable="true" source="org.eclipse.jst.jee.server:JSPMVCProject5"/></Host>
     </Engine>
   </Service>
 </Server>

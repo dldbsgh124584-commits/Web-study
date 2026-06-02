@@ -1,0 +1,201 @@
+package com.sist.dao;
+/*
+ *   데이터베이스 연동
+ *   JDBD ========> DBCP ======> ORM
+ *                               데이터베이스 처리하는 라이브러리 집합
+ *                               MyBatis / JPA 
+ *                               | = XML이용하는 방식 : JSP 사이트
+ *                               | = Annotation : Spring-Boot
+ * 
+ *   1)SQL을 작성 => MyBatis로 전송
+ *                 | 자동으로 처리 (연결 / 전송 / 실행 / 결과값 담기)
+ *      
+ *      | => 설정 => XML
+ *        => 1) SQL문장 2) VO설정 3) ?에 값을 채우기
+ *        => 반복적인 구조를 없앤다
+ *   
+ *   2)동작 구조
+ *      = Config.xml => Connection => 한개만 설정
+ *      = mapper.xml => PreparedStatement / ResultSet
+ *         => 테이블당 1개 설정
+ *      1. Config.xml을 이용해서 => getConnection()/disConnection()
+ *      2. mapper를 읽어서 JDBC를 이용해서 처리
+ *      
+ *   3)장점
+ *     SQL문장 직접 제어 => 개발자가 해야됨
+ *     성능 최적화 => 튜닝
+ *     복잡한 SQL문장 제어  
+ *   4)단점
+ *     SQL문장을 직접 제어 => JPA에서는 SQL문장을 자동화
+ *     DB변경시 수정
+ *     객체 지향 ORM이 약하다
+ *  -------------------------------------------
+ *   SQL문장은 동일 / 동적 쿼리 (다중 검색) / #{} / ${}
+ *                                  ----- -----
+ *                                         '' 없이 처리 => table명 , column명
+ *                                  | ?에 값을 채운다
+ *   
+ *   => resultType : 결과값 담기 (ResultSet)
+ *   => parameterType : ?에 값이 들어간다
+ *      => 1. ?여러개면 VO 이용
+ *         2. VO에 없는 변수 여러개 => Map
+ *         
+ *   => SqlSessionFactory : SqlSession 생성 / XML 파싱
+ *   => SqlSession : PreparedStatement/ResultSet담당
+ *      ------------ conn.preparedStatement()
+ *                   ps.executeQuery()
+ *     
+ *   
+ */
+import java.util.*;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import com.sist.vo.DataBoardVO;
+
+import java.io.*;
+public class DataBoardDAO {
+      // 1. XML 파싱
+	private static SqlSessionFactory ssf;
+	static
+	{
+		try
+		{
+			Reader reader=Resources.getResourceAsReader("Config.xml");
+			
+			ssf=new SqlSessionFactoryBuilder().build(reader);
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+	} 
+	  // 2. 기능
+	public static List<DataBoardVO> databoardListData(int start)
+	{
+		List<DataBoardVO> list=
+				new ArrayList<DataBoardVO>();
+		SqlSession session=null; // conn생성
+		try 
+		{
+				session=ssf.openSession();
+				list=session.selectList("databoardListData",start);
+		}catch(Exception ex)
+		{
+			
+		}
+		finally
+		{
+			if(session!=null)
+				session.close(); // 반환(Connection
+		}
+		return list;
+					
+	}
+	
+	public static int databoardTotalPage()
+	{
+		int total=0;				
+		SqlSession session=ssf.openSession();		
+				total=session.selectOne("databoardTotalPage");
+		
+				session.close(); // 반환(Connection		
+		return total;						
+	}
+	/*
+	   public static int databoardTotalPage2()
+	   {
+		   int total=0;
+		   SqlSession session=ssf.openSession();
+		   total=session.selectOne("databoardTotalPage");
+		   session.close(); // 반환 (Connection)
+		   
+		   return total;
+	   }*/
+	// 추가
+//	<insert id="databoardInsert" parameterType="DataBoardVO">
+//    INSERT INTO mvcDataBoard VALUES(
+//       mdb_no_seq.nextval,
+//       #{name},
+//       #{subject},
+//       #{content},
+//       #{pwd},
+//       SYSDATE,
+//       0,
+//       #{filename},
+//       #{filesize}
+//    )        
+//  </insert>
+	  
+	// 1. 파일명 중복
+	// 2. 여러개 동시에 올리는 방법
+	// 3. 보완 
+	 
+    public static void databoardInsert(DataBoardVO vo)
+    {
+    	// ssf.openSession() => conn.setAutomit(false)
+    	SqlSession session=ssf.openSession(true);
+    	try
+    	{
+    		session=ssf.openSession(true);
+    	session.insert("databoardInsert",vo);
+    	}catch(Exception ex)
+    	{
+    		ex.printStackTrace();
+    	}
+    	finally
+    	{
+    		if(session!=null)
+    	    session.close();
+    	}   	
+    }
+//    </insert>
+//    <!-- 
+//        상세보기
+//     -->
+//     <update id="hitIncrement" parameterType="int">
+//      UPDATE mvcDataBoard SET
+//      hit=hit+1
+//      <include refid="where-no"/>
+//     </update>
+//     <!-- 
+//        실제 데이터 읽기
+//      -->
+//      <select id="databoardDetailData" parameterType="int" resultType="DataBoardVO">
+//        SELECT no,name,subject,content,hit,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,filesize,filename
+//        FROM mvcDataBoard
+//        <include refid="where-no"/>
+//      </select>
+     /*
+      *  상세보기
+      *  
+      *  
+      */
+        
+    
+    public static DataBoardVO databoardDetailData(int no)
+    {
+    	DataBoardVO vo=new DataBoardVO();
+    	SqlSession session=null; // PreparedStatement / ResultSet
+    	try
+    	{
+    		session=ssf.openSession();
+    		// 조회수 증가
+    		session.update("hitIncrement",no);
+    		session.commit();
+    		vo=session.selectOne("databoardDetailData",no);
+    	}catch(Exception ex)
+    	{
+    		ex.printStackTrace();
+    	}
+    	finally
+    	{
+    		if(session!=null)
+    			session.close();
+    	}
+    	
+    	return vo;
+    }
+}
