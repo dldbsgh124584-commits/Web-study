@@ -145,7 +145,7 @@
       
             
       
-      <Context docBase="JSPMVCProject5" path="/JSPMVCProject5" reloadable="true" source="org.eclipse.jst.jee.server:JSPMVCProject5"/><Context docBase="JSPMVCLastProject" path="/JSPMVCLastProject" reloadable="true" source="org.eclipse.jst.jee.server:JSPMVCLastProject"/><Context docBase="JSPFrontProject1" path="/JSPFrontProject1" reloadable="true" source="org.eclipse.jst.jee.server:JSPFrontProject1"/></Host>
+      <Context docBase="JSPFrontProject6" path="/JSPFrontProject6" reloadable="true" source="org.eclipse.jst.jee.server:JSPFrontProject6"/><Context docBase="JSPFrontProject7" path="/JSPFrontProject7" reloadable="true" source="org.eclipse.jst.jee.server:JSPFrontProject7"/></Host>
     </Engine>
   </Service>
 </Server>

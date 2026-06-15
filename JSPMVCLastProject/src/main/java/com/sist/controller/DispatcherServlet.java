@@ -119,7 +119,7 @@ public class DispatcherServlet extends HttpServlet {
 						else if(jsp.startsWith("redirect:"))
 						{
 							// sendRedirect : request초기화 => 화면 변경
-							jsp=jsp.substring(jsp.indexOf(".")+1);
+							jsp=jsp.substring(jsp.indexOf(":")+1);
 							response.sendRedirect(jsp);
 							// return "redirect:list.do"
 						}

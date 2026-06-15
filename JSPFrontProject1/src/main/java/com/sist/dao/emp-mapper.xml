@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+     String sql="SELECT empno,ename,job,hiredate,sal,dname,loc
+     FROM emp,dept 
+     WHERE emp.deptno=dept.deptno
+     ORDER BY empno ASC"
+     
+     ps=conn.preparedStatement(sql)
+     ResultSet rs=ps.executeQuery()
+     while(rs.next())
+     {
+        EmpVO vo=new EmpVO();
+        vo.setEmpno()
+        vo.setEname()
+        vo.setJob()
+        vo.setHiredate()
+        vo.setSal()
+        vo.setDname() : 오류발생
+        vo.getDvo().setDname()
+        vo.getDvo().setLoc()
+     }
+ -->
+<mapper namespace="com.sist.dao.emp-mapper">  <!-- 이 파일이 어떤 자바DAO인터페이스나 고유한 영역과 연결되는지 이름을 붙여주는 곳 -->
+ <resultMap type="com.sist.dao.EmpVO" id="empMap"> <!-- db컬럼과 자바 객체가 서로 다를 때 짝을 지어주는 지도 역할 -->
+   <result property="dvo.dname" column="dname"/>
+   <result property="dvo.loc" column="loc"/>
+ </resultMap>
+  <select id="empListData" resultMap="empMap"> <!-- sql문 정의 하는 곳 , id가 호출하는 메서드이름 역할 함 -->
+    SELECT empno,ename,job,TO_CHAR(hiredate,'YYYY-MM-DD') as dbday,
+           sal,dname,loc
+      FROM emp,dept
+      WHERE emp.deptno=dept.deptno
+      ORDER BY empno ASC
+  </select>
+</mapper>
