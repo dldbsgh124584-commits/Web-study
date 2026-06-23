@@ -1,0 +1,107 @@
+package com.sist.dao;
+import java.util.*;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.sist.commons.*;
+import com.sist.vo.*;
+public class FoodDAO {
+    private static SqlSessionFactory ssf;
+    static
+    {
+    	ssf=CreateSqlSessionFactory.getSsf();
+    }
+    /*
+     * <select id="foodListData" resultType="FoodVO" parameterType="int">
+	   SELECT no,name,poster,address,phone,likecount,replycount,
+	          theme,content
+	   FROM food
+	   ORDER BY no ASC
+	   OFFSET #{start} ROWS FETCH NEXT 12 ROWS ONLY
+	  </select>
+	 */
+	 public static List<FoodVO> foodListData(int start)
+	 {
+		 //1. 연결
+		 SqlSession session=ssf.openSession();
+		 //2. SQL문장 실행 결과 
+		 List<FoodVO> list=session.selectList("foodListData",start);
+		                                         //id명       #{start}
+		 //3. session 닫기
+		 session.close(); // 반환
+		 return list;
+	 }
+	 /*
+	  <select id="foodTotalPage" resultType="int">
+	   SELECT CEIL(COUNT(*)/12.0) FROM food
+	  </select>
+     * 
+     */
+	 public static int foodTotalPage()
+	 {
+		 SqlSession session=ssf.openSession();
+		 int total=session.selectOne("foodTotalPage");
+		 session.close();
+		 return total;
+	 }
+	 /*
+	  * <!-- 상세보기 -->
+		  <select id="foodHitIncrement" parameterType="int">
+		   UPDATE food SET
+		   hitcount=hitcount+1
+		   WHERE no={no}
+		  </select>
+		  <select id="foodDetailData" resultType="FoodVO" parameterType="int">
+		   SELECT *
+		   FROM food
+		   WHERE no=#{no}
+      */
+	 public static FoodVO foodDetailData(int no)
+	 {
+		 SqlSession session=ssf.openSession(true);
+		 session.update("foodHitIncrement",no);
+		 FoodVO vo=session.selectOne("foodDetailData",no);
+		 session.close();
+		 return vo;
+	 }
+	 /*
+		  </select>
+		  <select id="foodRearData" resultType="FoodVO" parameterType="string">
+		   SELECT no,name,poster,address,rownum
+		   FROM food
+		   WHERE address LIKE '%'||#{address}||'%'
+		   AND rownum&lt;=7
+		  </select>
+	  * 
+	  */
+	 public static List<FoodVO> foodRearData(String address)
+	 {
+		 SqlSession session=ssf.openSession();
+		 List<FoodVO> list=session.selectList("foodRearData",address);
+		 session.close();
+		 return list;
+				 
+	 }
+	 /*
+	  * <select id="foodCategoryData" resultType="FoodVO" parameterType="string">
+	   SELECT no,name,poster
+	   FROM food
+	   WHERE type LIKE '%'||#{type}||'%'
+	   ORDER BY no ASC
+	  </select>
+	  * 
+	  */
+	 public static List<FoodVO> foodCategoryData(String type)
+	 {
+		 //1. 연결
+		 SqlSession session=ssf.openSession();
+		 //2. SQL문장 실행 결과 
+		 List<FoodVO> list=session.selectList("foodCategoryData",type);
+		                                         //id명       #{start}
+		 //3. session 닫기
+		 session.close(); // 반환
+		 return list;
+	 }
+    
+}
