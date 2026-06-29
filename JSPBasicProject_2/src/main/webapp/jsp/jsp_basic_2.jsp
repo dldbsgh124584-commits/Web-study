@@ -47,8 +47,8 @@ h2 {
         255 255 255
    --%>
   <p class="exam" style="color:red"><%=colors[0] %></p>
-  <p class="exam" style="color:#0000FF"><%=colors[0] %></p>
-  <p class="exam" style="color:rgb(0,255,0)"><%=colors[0] %></p>
+  <p class="exam" style="color:#0000FF"><%=colors[1] %></p>
+  <p class="exam" style="color:rgb(0,255,0)"><%=colors[2] %></p>
   <%
      h2="글자 크기(font-size)";
      /*
