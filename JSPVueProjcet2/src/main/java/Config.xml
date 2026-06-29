@@ -15,8 +15,8 @@
    <!-- SQL실행 로그 출력 -->
   </settings>
   <typeAliases>
-   <typeAlias type="com.sist.vo.FoodVO" alias="FoodVO"/>
-   <typeAlias type="com.sist.vo.GoodsVO" alias="GoodsVO"/>
+   <typeAlias type="com.sist.vo.BoardVO" alias="BoardVO"/>
+
   </typeAliases>
   <environments default="development">
    <environment id="development">
@@ -35,8 +35,7 @@
    </environment>
   </environments>
   <mappers>
-   <mapper resource="com/sist/dao/food-mapper.xml"/>
-   <mapper resource="com/sist/dao/goods_mapper.xml"/>
+   <mapper resource="com/sist/dao/board-mapper.xml"/>
    <!-- include -->
   </mappers>
 </configuration>

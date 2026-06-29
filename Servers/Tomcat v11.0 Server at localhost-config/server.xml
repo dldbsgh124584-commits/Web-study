@@ -145,7 +145,7 @@
       
             
       
-      <Context docBase="JSPMiniProject" path="/JSPMiniProject" reloadable="true" source="org.eclipse.jst.jee.server:JSPMiniProject"/><Context docBase="JSPLastProject" path="/JSPLastProject" reloadable="true" source="org.eclipse.jst.jee.server:JSPLastProject"/><Context docBase="JSPVueProject" path="/JSPVueProject" reloadable="true" source="org.eclipse.jst.jee.server:JSPVueProject"/></Host>
+      <Context docBase="JSPVueProjcet2" path="/JSPVueProjcet2" reloadable="true" source="org.eclipse.jst.jee.server:JSPVueProjcet2"/></Host>
     </Engine>
   </Service>
 </Server>
