@@ -31,16 +31,16 @@ h3{
 </style>
 <script type="text/javascript" src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script type="text/javascript" src="../goods/pagecard.js"></script>
+<script type="text/javascript" src="../commons/pagecard.js"></script>
 </head>
 <body>
   <div class="container" id="listApp">
     <div class="row">
      <div class="col-sm-3" v-for="(vo,index) in list" :key="index">
-       <a :href="'../goods/detail.do?no='+vo.no">
+       <a :href="'../food/detail.do?no='+vo.no">
         <div class="thumbnail">
-          <img :src="vo.goods_poster" style="width: 250px;height: 150px;object-fit:cover">
-          <p>{{vo.goods_name}}</p>
+          <img :src="vo.poster" style="width: 250px;height: 150px;object-fit:cover">
+          <p>{{vo.name}}</p>
         </div>
        </a>
      </div>
@@ -74,7 +74,7 @@ h3{
     	methods:{
     		// goods/list_vue.do?page=1
     		async dataRecv(){
-    			await axios.get('../goods/list_vue.do',{
+    			await axios.get('../food/list_vue.do',{
     				params:{
     					page:this.curpage
     				}

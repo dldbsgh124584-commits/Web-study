@@ -2,6 +2,7 @@ package com.sist.model;
 
 import org.jsoup.helper.HttpConnection.Request;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.commons.Commons;
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
@@ -28,12 +29,19 @@ public class MemberModel {
 		   session.setAttribute("name",vo.getName());
 		   session.setAttribute("isadmin",vo.getIsadmin());
 	   }
+	   try
+	   {
+		   //ObjectMapper mapper=new ObjectMapper();
+		   //String json=mapper.writeValueAsString(vo);
+		   Commons.sendData(response,"text/html",vo.getMsg());
+	   }catch(Exception ex) {}
 	   
-	   Commons.sendData(response,"text/html",vo.getMsg());
    }
    @RequestMapping("member/logout.do")
-   public void member_logout(HttpServletRequest requset,HttpServletResponse response)
+   public void member_logout(HttpServletRequest request,HttpServletResponse response)
    {
-	   
+	   HttpSession session=request.getSession();
+	   session.invalidate();
    }
+   
 }
