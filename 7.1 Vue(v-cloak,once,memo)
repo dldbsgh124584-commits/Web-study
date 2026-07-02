@@ -78,4 +78,4 @@ html<button @click="count++">count 증가</button>
 
 v-memo="[name]" → name이 바뀔 때만 이 <div> 블록 재렌더링
 count만 증가시키면 v-memo 블록 안의 {{count}}는 안 바뀜 (name이 안 바뀌었으니까)
-name을 바꾸면 그제서야 블록 전체(count 포함) 갱신
+name을 바꾸면 그제서야 블록 전체(count 포함) 갱신 
