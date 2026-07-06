@@ -1,0 +1,81 @@
+▸ v-cloak
+
+화면 깜빡임(Flickering) 방지 — Vue 인스턴스가 마운트되기 전, {{ }} 머스태시 문법이 잠깐 그대로 노출되는 현상을 막아준다.
+
+동작 원리
+
+Vue가 로드되고 mount() 되기 전까지는 [v-cloak] 속성이 엘리먼트에 남아있음
+마운트가 완료되면 Vue가 이 속성을 자동으로 제거
+CSS에서 [v-cloak] { display: none } 을 걸어두면, 마운트 전엔 숨겨져 있다가 마운트 완료 시 자동으로 나타남
+
+코드 예시
+html<style>
+[v-cloak]{
+  display: none
+}
+</style>
+
+<div id="app" v-cloak>
+  <h2>{{title}}</h2>
+</div>
+
+<script>
+let app = Vue.createApp({
+  data(){
+    return { title: 'v-cloak: 깜빡임 방지' }
+  }
+}).mount("#app")
+</script>
+
+ 반드시 CSS 규칙과 함께 써야 의미가 있음 (v-cloak 속성만 있고 CSS가 없으면 아무 효과 없음)
+
+
+▸ v-once
+
+한 번만 렌더링 — 최초 렌더링 이후 데이터가 변경되어도 화면이 갱신되지 않는다.
+
+언제 쓰나?
+
+이후에 절대(혹은 거의) 바뀌지 않는 정적인 정보
+예: 회사명, 작성자, 게시물 번호, 로고, 개인정보 처리방침(Footer) 등
+
+코드 예시
+html<h4 v-once>{{message}}</h4>  <!-- 변경 안 됨 -->
+<h4>{{message}}</h4>          <!-- 변경 됨 -->
+<button @click="change()">변경</button>
+
+<script>
+let app = Vue.createApp({
+  data(){
+    return { message: "Hello Vue!!" }
+  },
+  methods:{
+    change(){
+      this.message = "Vue3 v-once";
+    }
+  }
+}).mount('#app')
+</script>
+버튼을 눌러도 v-once가 붙은 <h4>는 그대로, 안 붙은 <h4>만 바뀜.
+
+▸ v-memo
+
+렌더링 최적화(메모이제이션) — 지정한 값(의존성 배열)이 변경되지 않으면 해당 블록을 다시 렌더링하지 않는다.
+
+v-once와 차이점
+구분v-oncev-memo렌더링 횟수딱 1번, 이후 영구 고정지정 값이 바뀔 때만 재렌더링유연성고정 (조건 없음)배열 안 값으로 재렌더링 조건 지정 가능용도완전 정적 데이터리스트 등 대량 렌더링 최적화
+코드 예시
+html<button @click="count++">count 증가</button>
+<button @click="name='Hong'">이름 변경</button>
+
+<div v-memo="[name]">
+  <h3>{{name}}</h3>
+  <h3>{{count}}</h3>
+</div>
+
+<h3>{{name}}</h3>
+<h3>{{count}}</h3>
+
+v-memo="[name]" → name이 바뀔 때만 이 <div> 블록 재렌더링
+count만 증가시키면 v-memo 블록 안의 {{count}}는 안 바뀜 (name이 안 바뀌었으니까)
+name을 바꾸면 그제서야 블록 전체(count 포함) 갱신 
