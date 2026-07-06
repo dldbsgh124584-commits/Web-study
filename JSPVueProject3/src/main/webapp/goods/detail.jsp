@@ -248,6 +248,7 @@ h3{
     				this.replyList=response.data
     			})
     		}
+  		
     		
     	}
     }).mount("#detailApp")

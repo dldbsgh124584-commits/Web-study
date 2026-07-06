@@ -7,12 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <!-- ****** Top Header Area Start ****** -->
-    
-    <!-- ****** Top Header Area End ****** -->
-
-    <!-- ****** Header Area Start ****** -->
- <div class="top_header_area">
+<div class="top_header_area">
         <div class="container">
             <div class="row">
                 <div class="col-5 col-sm-6">
@@ -53,6 +48,7 @@
             </div>
         </div>
     </div>
+    <!-- ****** Header Area Start ****** -->
     <header class="header_area">
         <div class="container">
             <div class="row">
@@ -80,15 +76,15 @@
                                         <a class="dropdown-item" href="index.html">회원가입</a>
                                         <a class="dropdown-item" href="archive.html">아이디찾기</a>
                                         <a class="dropdown-item" href="single.html">비밀번호찾기</a>
-                                        
+              
                                     </div>
                                 </li>
-                               <%--
-                                    1. 예약
+                                <%--
+                                    1. 예약 
                                     2. 결제
-                                    3. 추천
-                                    4. 어드민 : 관리
-                                --%>
+                                    3. 추천 
+                                    4. 어드민 : 관리 
+                                 --%>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">여행</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
@@ -96,10 +92,9 @@
                                         <a class="dropdown-item" href="archive.html">부산 여행</a>
                                         <a class="dropdown-item" href="single.html">제주 여행</a>
                                         <a class="dropdown-item" href="single.html">코스 추천</a>
-                                        
+              
                                     </div>
                                 </li>
-                                
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">맛집</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
@@ -107,7 +102,6 @@
                                         <a class="dropdown-item" href="archive.html">맛집 예약</a>
                                         <a class="dropdown-item" href="single.html">맛집 추천</a>
                                         <a class="dropdown-item" href="single.html">맛집 검색</a>
-                                        
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -116,29 +110,27 @@
                                         <a class="dropdown-item" href="index.html">레시피</a>
                                         <a class="dropdown-item" href="archive.html">쉐프</a>
                                         <a class="dropdown-item" href="single.html">레시피 등록</a>
-                                        <a class="dropdown-item" href="single.html">가격비교</a>
-                                        
+                                        <a class="dropdown-item" href="single.html">가격 비교</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">커뮤니티</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
                                         <%--
-                                             ../board/list.do = DispatcherServlet(Controller)
-                                                                 | Model 찾기
-                                                                 | Model 안에서 @RequestMapping() 찾기
-                                                                 | 밑에 있는 메소드 호출
-                                                                 ------------------------- HandleMapping
-                                                                 | request.setAttribute()
-                                                                   JSP 찾기 
-                                                                 ------------------------- ViewResolver
-                                                                 | => request에 첨부된 데이터를 JSP로 전송
+                                            ../board/list.do = DispatcherServlet(Controller) 
+                                                                | Model 찾기 
+                                                                | Model안에서 @RequestMapping() 찾기 
+                                                                | 밑에 있는 메소드가 호출 
+                                                                ---------------------------HandleMapping
+                                                                | request.setAttribute() 
+                                                                  JSP 찾기  
+                                                                ---------------------------ViewResolver
+                                                                | => request에 첨부된 데이터를 JSP 전송 
                                          --%>
                                         <a class="dropdown-item" href="../board/list.do">자유 게시판</a>
                                         <a class="dropdown-item" href="archive.html">묻고 답하기</a>
-                                        <a class="dropdown-item" href="single.html">공지사항</a>
+                                        <a class="dropdown-item" href="single.html">공지 사항</a>
                                         <a class="dropdown-item" href="single.html">실시간 채팅</a>
-                                        
                                     </div>
                                 </li>
                                 <li class="nav-item">
@@ -148,7 +140,7 @@
                                     <a class="nav-link" href="#">스토어</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="adminpage/admin_main.do">관리자페이지</a>
+                                    <a class="nav-link" href="../adminpage/admin_main.do">관리자페이지</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="../mypage/mypage_main.do">마이페이지</a>
@@ -161,6 +153,6 @@
             </div>
         </div>
     </header>
- 
+    <!-- ****** Header Area End ****** -->
 </body>
 </html>

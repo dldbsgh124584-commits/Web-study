@@ -37,9 +37,8 @@ h3{
     <div class="panel panel-success product-card">
       <div class="panel-body">
         <div class="row">
-         <table class="table">
-         
-         <tbody>
+          <table class="table">
+          <tbody>
            <tr>
              <th width=30% class="text-center" rowspan="8">
               <img :src="vo.poster" style="width:100%;object-fit:cover">
@@ -86,21 +85,28 @@ h3{
              </td>
            </tr>
          </tbody>
-       </table>
+        </table>
         </div>
       </div>
     </div>
     <div class="panel panel-success product-card">
       <div class="panel-body">
+        <script src="../commos/replycard.js"></script>
+        <replycard :cno="cno" :rno="no" :login-id="loginId"></replycard>
+      </div>
+    </div>
+    <!-- <div class="panel panel-success product-card">
+      <div class="panel-body">
+        <script src="replycard.js"></script>
         <div class="row">
-         <table class="table" v-if="replyList.length===0">
+          <table class="table" v-if="replyList.length===0">
                 <tr>
                   <td class="text-center">
                     <strong>댓글이 없습니다</strong>
                   </td>
                 </tr>
-         </table>
-         <table class="table">
+           </table>
+           <table class="table">
                 <tr>
                   <td>
                     <table class="table" v-for="rvo in replyList" :key="rvo.no">
@@ -142,95 +148,37 @@ h3{
 	           </tr>
 	          </table>
         </div>
-      </div>
+       </div>
     </div>
-  </div>
+  </div> -->
   <script>
     let app=Vue.createApp({
-    	data(){
-    		return{
-    			no:${no},
-    			cno:${cno},
-    			vo:{},
-    			loginId:'${sessionScope.id}',
-    			replyList:[],
-    			msg:''
-    	   }
-    	},
-    	mounted(){
-    		this.dataRecv()
-    	},
-    	methods:{
-    		async dataRecv(){
-    			// 상세보기 정보
-    			await axios.get('../food/detail_vue.do',{
-    				params:{
-    					no:this.no
-    				}
-    			}).then(response=>{
-    				this.vo=response.data
-    			})
-    			// 댓글
-    			axios.get('../reply/list_vue.do',{
+        data(){
+        	return {
+        		no:${no},
+        		cno:${cno},
+        		vo:{},
+        		loginId:'${sessionScope.id}'
+        	}
+        },
+        mounted(){
+        	axios.get('../food/detail_vue.do',{
     			params:{
-    				cno:this.cno,
-    				rno:this.no
+    				no:this.no
     			}
-    		    }).then(response=>{
+    		}).then(response=>{
     			console.log(response.data)
-    			this.replyList=response.data
-    			
-    		     
-    		   })
-    		},
-    		go(){
-    			window.history.back()
-    		},
-    		insert(){
-    			axios.get('../reply/insert_vue.do',{
-    				params:{
-    					cno:this.cno,
-    					rno:this.no,
-    					msg:this.msg
-    				}
-    			}).then(response=>{
-    				this.replyList=response.data
-    				this.msg=''
-    			})
-    		},
-    		deleteReply(no){
-    			axios.get('../reply/delete_vue.do',{
-    				params:{
-    					no:no,
-    					cno:this.cno,
-    					rno:this.no
-    				}
-    			}).then(response=>{
-    				this.replyList=response.data
-    			})
-    		},
-    		toggle(rvo){
-    			this.replyList.forEach(r=>{
-    				if(r.no!=rvo.no)
-    				{
-    					r.show=false
-    				}
-    			})
-    			rvo.show=!rvo.show
-    		},
-    		update(rvo){
-    			axios.post('../reply/update_vue.do',{},{
-    				params:{
-    					no:rvo.no,
-    					cno:rvo.cno,
-    					rno:rvo.rno,
-    					msg:rvo.umsg
-    				}
-    			}).then(response=>{
-    				this.replyList=response.data
-    			})
-    		}   		    		    		
-    	}
+    			this.vo=response.data
+    		})
+        },
+        methods:{
+        	go(){
+        		window.history.back()
+        	}
+        },
+        components:{
+        	replycard:ReplyComponent
+        }
     }).mount("#detailApp")
   </script>
 </body>

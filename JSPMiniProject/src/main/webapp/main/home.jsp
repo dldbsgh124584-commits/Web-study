@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
- <section class="categories_area clearfix" id="about">
+<!-- ****** Categories Area Start ****** -->
+    <section class="categories_area clearfix" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4">
