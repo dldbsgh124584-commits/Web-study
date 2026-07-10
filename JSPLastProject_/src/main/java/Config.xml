@@ -24,6 +24,31 @@
                         = CREATE : 테이블 (키 설정 , 제약조건)
                                    View / Index / Trigger
                   | = JOIN / SubQuery / 페이징 처리
+                  
+     JSP 에서 부터 시작 : 메뉴 선택
+                      board/list.do
+                          |
+                      DispatcherServlet
+                          |
+                       model 전체 클래스 찾기
+                       @RequestMapping("board/list.do")
+                       public String board_list()
+                       {
+                          DAO ...
+                          결과값 => request.setAttribute()
+                          
+                          return "../main/main.jsp";
+                       }
+                       
+                       1. 화면 변경 "../main/main.jsp";
+                       2. 기존의 화면 호출
+                          return "redirect: ~.do"
+                          = insert / update / delete => list.do
+                       3. 화면 변경없이 처리
+                          void => JSON 전송
+                          
+                       
+                       ajax = vue = react
      
  -->
 <!DOCTYPE configuration
@@ -44,6 +69,9 @@
   <typeAliases>
    <typeAlias type="com.sist.vo.MemberVO" alias="MemberVO"/>
    <typeAlias type="com.sist.vo.FoodVO" alias="FoodVO"/>
+   <typeAlias type="com.sist.vo.TourVO" alias="TourVO"/>
+   <typeAlias type="com.sist.vo.BoardVO" alias="BOardVO"/>
+   <typeAlias type="com.sist.vo.ReviewVO" alias="ReviewVO"/>
   </typeAliases>
   <environments default="development">
    <environment id="development">
@@ -64,6 +92,10 @@
   <mappers>
    <mapper resource="com/sist/mapper/member-mapper.xml"/>
    <mapper resource="com/sist/mapper/food-mapper.xml"/>
+   <mapper resource="com/sist/mapper/tour-mapper.xml"/>
+   <mapper resource="com/sist/mapper/main-mapper.xml"/>
+   <mapper resource="com/sist/mapper/board-mapper.xml"/>
+   <mapper resource="com/sist/mapper/review-mapper.xml"/>
    <!-- include -->
   </mappers>
 </configuration>

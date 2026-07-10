@@ -14,10 +14,8 @@
   gap: 12px;
   overflow-x: auto;
   padding: 8px;
-  scroll-behavior: smooth;
-  
-  width:calc(150px * 7 + 12px * 6 + 16px);
-  max-width: 100%
+  width: calc(150px * 6 + 12px * 5 + 16px);
+  max-width: 100%;
 }
 .recent-card {
   display: flex;
